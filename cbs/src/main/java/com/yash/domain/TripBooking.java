@@ -23,26 +23,26 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "TripBooking")
+@Table(name = "trip_booking")
 public class TripBooking {
+
 	/* id stores the value of trip booking id */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "tripBookingId", columnDefinition = "INTEGER")
+	@Column(name = "trip_Booking_id")
 	private int tripBookingId;
 	/*
 	 * customer stores the value of customer entity - one to one mapped with trip
 	 * booking-
 	 */
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "customer_id")
+	@OneToOne
+	@JoinColumn(name = "customerid")
 	private Customer customer;
 	/*
 	 * driver stores the value of driver entity - many to one mapped with trip
 	 * booking
 	 */
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity=Driver.class)
-	@JoinColumn(name = "driverId")
+	@ManyToOne
 	private Driver driver;
 	/*
 	 * fromLocation stores the value of location from where customer has booked the
@@ -63,7 +63,7 @@ public class TripBooking {
 	 * booked the cab
 	 */
 	@NotBlank(message = "From Date time can't be blank")
-//@JsonFormat(pattern="yyyy-mm-dd")
+	// @JsonFormat(pattern="yyyy-mm-dd")
 	@Column(name = "fromDateTime", nullable = false)
 	private LocalDateTime fromDateTime;
 	/*
@@ -71,7 +71,7 @@ public class TripBooking {
 	 * the cab
 	 */
 	@NotBlank(message = "To Date time can't be blank")
-//@JsonFormat(pattern="yyyy-mm-dd")
+	// @JsonFormat(pattern="yyyy-mm-dd")
 	@Column(name = "toDateTime", nullable = false)
 	private LocalDateTime toDateTime;
 	/* status stores the value of status of the trip */

@@ -1,12 +1,9 @@
 package com.yash.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -17,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  */
 
 @Entity
-@Table(name="cab")
+@Table(name="cab_data")
 public class Cab {
 
 	/**
@@ -26,34 +23,26 @@ public class Cab {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "driverId")
 	private int cabid;
-	
-	
+
 	/**
 	 * carType for cab
 	 */
 	@NotBlank(message = "cartype is required")
 	private String carType;
 	
-	
-	
 	/**
 	 * cab rate per kilometer
 	 */
 	@NotBlank(message = "perkmrate is required")
 	private float perkmRate;
-	
-	
+		
 	/**
 	 * blank 
 	 */
 	public Cab() {
 		super();
 	}
-
-	
 
 	/**
 	 * @param cabid
@@ -68,16 +57,12 @@ public class Cab {
 		this.perkmRate = perkmRate;
 	}
 
-
-
 	/**
 	 * @return the cabid
 	 */
 	public int getCabid() {
 		return cabid;
 	}
-
-
 
 	/**
 	 * @param cabid the cabid to set
@@ -86,8 +71,6 @@ public class Cab {
 		this.cabid = cabid;
 	}
 
-
-
 	/**
 	 * @return the carType
 	 */
@@ -95,25 +78,19 @@ public class Cab {
 		return carType;
 	}
 
-
-
 	/**
 	 * @param carType the carType to set
 	 */
 	public void setCarType(String carType) {
 		this.carType = carType;
 	}
-
-
-
+	
 	/**
 	 * @return the perkmRate
 	 */
 	public float getPerkmRate() {
 		return perkmRate;
 	}
-
-
 
 	/**
 	 * @param perkmRate the perkmRate to set
@@ -122,18 +99,9 @@ public class Cab {
 		this.perkmRate = perkmRate;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Cab [cabid=" + cabid + ", carType=" + carType + ", perkmRate=" + perkmRate + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

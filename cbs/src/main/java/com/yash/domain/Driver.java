@@ -1,5 +1,6 @@
 package com.yash.domain;
 
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -16,19 +17,17 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 /* Driver POJO */
-
-
 @Entity
-@Table(name = "Driver")
+@Table(name = "driver_data")
 public class Driver extends AbstractUser
 {
+
 	/*
 	 * Driver Id 
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int driverId;
-	
 	
 	/*
 	 * Driver Licence Number 
@@ -37,13 +36,12 @@ public class Driver extends AbstractUser
 	@Size(min = 4, max = 255, message = "please use 4 to 255 characters for licence Number")
 	private String licenceNo;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "cabid")
 	private Cab cab;
 	
-	@OneToMany(cascade=CascadeType.ALL,targetEntity=TripBooking.class)
-	@JoinColumn(name = "tripBookingId")
-	private Set<TripBooking> tripBooking = new TreeSet<>();
-	
+	@OneToMany(mappedBy = "driver")
+	private List<TripBooking>tripBookings;
 	
 	/*
 	 * Driver Rating
@@ -51,14 +49,73 @@ public class Driver extends AbstractUser
 	@NotBlank(message = "Rating is required")
 	private float rating;
 
-	//Constructor
-	public Driver(int driverId,
-			@NotBlank(message = "Licence number is required") @Size(min = 4, max = 255, message = "please use 4 to 255 characters for licence Number") String licenceNo,
-			Cab cab, @NotBlank(message = "Rating is required") float rating) {
-		super();
+	/**
+	 * @return the driverId
+	 */
+	public int getDriverId() {
+		return driverId;
+	}
+
+	/**
+	 * @param driverId the driverId to set
+	 */
+	public void setDriverId(int driverId) {
 		this.driverId = driverId;
+	}
+
+	/**
+	 * @return the licenceNo
+	 */
+	public String getLicenceNo() {
+		return licenceNo;
+	}
+
+	/**
+	 * @param licenceNo the licenceNo to set
+	 */
+	public void setLicenceNo(String licenceNo) {
 		this.licenceNo = licenceNo;
+	}
+
+	/**
+	 * @return the cab
+	 */
+	public Cab getCab() {
+		return cab;
+	}
+
+	/**
+	 * @param cab the cab to set
+	 */
+	public void setCab(Cab cab) {
 		this.cab = cab;
+	}
+	
+	/**
+	 * @return the tripBookings
+	 */
+	public List<TripBooking> getTripBookings() {
+		return tripBookings;
+	}
+
+	/**
+	 * @param tripBookings the tripBookings to set
+	 */
+	public void setTripBookings(List<TripBooking> tripBookings) {
+		this.tripBookings = tripBookings;
+	}
+
+	/**
+	 * @return the rating
+	 */
+	public float getRating() {
+		return rating;
+	}
+
+	/**
+	 * @param rating the rating to set
+	 */
+	public void setRating(float rating) {
 		this.rating = rating;
 	}
 
@@ -68,51 +125,12 @@ public class Driver extends AbstractUser
 		super();
 	}
 
-	//Driver Id Getter
-	public int getDriverId() {
-		return driverId;
-	}
-
-	//Driver Id Setter
-	public void setDriverId(int driverId) {
-		this.driverId = driverId;
-	}
-
-	//Licence Number Getter
-	public String getLicenceNo() {
-		return licenceNo;
-	}
-
-	//Licence Number Setter
-	public void setLicenceNo(String licenceNo) {
-		this.licenceNo = licenceNo;
-	}
-
-	//Cab Getter
-	public Cab getCab() {
-		return cab;
-	}
-
-	//Cab Setter
-	public void setCab(Cab cab) {
-		this.cab = cab;
-	}
-
-	//Rating Getter
-	public float getRating() {
-		return rating;
-	}
-
-	//Rating Setter
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
-
 	//ToString Method
 	@Override
-	public String toString() 
-	{
-		return "Driver [driverId=" + driverId + ", licenceNo=" + licenceNo + ", cab=" + cab + ", rating=" + rating
-				+ "]";
+	public String toString() {
+		return "Driver [driverId=" + driverId + ", licenceNo=" + licenceNo + ", cab=" + cab + ", tripBookings="
+				+ tripBookings + ", rating=" + rating + ", name=" + name + ", password=" + password + ", address="
+				+ address + ", mobileNumber=" + mobileNumber + ", email=" + email + "]";
 	}
+
 }
