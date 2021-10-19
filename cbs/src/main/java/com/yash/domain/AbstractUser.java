@@ -101,4 +101,5 @@ public abstract class AbstractUser {
 		this.email = email;
 	}
 
+	
 }
