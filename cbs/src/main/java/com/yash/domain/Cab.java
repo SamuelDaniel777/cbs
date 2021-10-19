@@ -25,12 +25,6 @@ public class Cab {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cabid;
 
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "driverId")
-	private Driver driver;
-	
-
 	/**
 	 * carType for cab
 	 */
@@ -40,7 +34,7 @@ public class Cab {
 	/**
 	 * cab rate per kilometer
 	 */
-	//@NotBlank(message = "perkmrate is required")
+	@NotBlank(message = "perkmrate is required")
 	private float perkmRate;
 		
 	/**
