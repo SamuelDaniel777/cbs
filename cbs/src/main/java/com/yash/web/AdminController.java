@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.yash.domain.AbstractUser;
 import com.yash.domain.Admin;
+import com.yash.domain.TripBooking;
 import com.yash.exception.InvalidData;
 import com.yash.serviceimpl.AdminServiceImpl;
 
@@ -33,7 +34,7 @@ public class AdminController {
 			session.setAttribute("AdminSession", fromAdminServ);
 			return fromAdminServ;
 		} else {
-			return null;
+			return new Admin();
 		}
 		
 	}
@@ -53,7 +54,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("/getalltrips")
-	public List getAllTrips() {
+	public List<TripBooking> getAllTrips() {
+		
 		return null;
 	}
 	
