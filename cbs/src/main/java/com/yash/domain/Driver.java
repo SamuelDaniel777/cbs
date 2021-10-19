@@ -36,8 +36,7 @@ public class Driver extends AbstractUser
 	@Size(min = 4, max = 255, message = "please use 4 to 255 characters for licence Number")
 	private String licenceNo;
 
-
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "cabid")
 	private Cab cab;
 	

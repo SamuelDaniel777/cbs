@@ -22,8 +22,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.NoArgsConstructor;
-
 @Entity
 @Table(name = "trip_booking")
 public class TripBooking {
