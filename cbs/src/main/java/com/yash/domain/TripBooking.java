@@ -22,10 +22,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.NoArgsConstructor;
+
 
 @Entity
-//@NoArgsConstructor
+
 @Table(name = "TripBooking")
 
 public class TripBooking {

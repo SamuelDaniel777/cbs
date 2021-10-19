@@ -74,6 +74,6 @@ public class TripBookingController
 			e.printStackTrace();
 		}
 		return null;
-	}
+	 }
 	
 }
