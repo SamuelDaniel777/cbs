@@ -38,6 +38,7 @@ public class Driver extends AbstractUser
 	private String licenceNo;
 
 	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "cabid")
 	private Cab cab;
 	
 	@OneToMany(cascade=CascadeType.ALL,targetEntity=TripBooking.class)

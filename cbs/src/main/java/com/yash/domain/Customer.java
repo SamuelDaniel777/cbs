@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,12 +16,23 @@ import javax.persistence.Table;
 @Table(name="Customer")
 public class Customer extends AbstractUser{
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	private TripBooking tripbooking;
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int customerid;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "tripBookingId")
+	private TripBooking tripbooking;
+
+	   
+	/**
+	 * default constructor
+	 */
+	public Customer() {
+		super();
+	}
 
 	/**
 	 * @param customerid

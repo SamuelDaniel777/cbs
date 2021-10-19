@@ -22,8 +22,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.NoArgsConstructor;
+
 @Entity
+//@NoArgsConstructor
 @Table(name = "TripBooking")
+
 public class TripBooking {
 	/* id stores the value of trip booking id */
 	@Id
@@ -35,7 +39,7 @@ public class TripBooking {
 	 * booking-
 	 */
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "customer_id")
+	@JoinColumn(name = "customerid")
 	private Customer customer;
 	/*
 	 * driver stores the value of driver entity - many to one mapped with trip
