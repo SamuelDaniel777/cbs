@@ -13,9 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Customer")
+@Table(name="customer_data")
 public class Customer extends AbstractUser{
-	
 	
 
 	@Id
@@ -23,7 +22,7 @@ public class Customer extends AbstractUser{
 	int customerid;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "tripBookingId")
+	@JoinColumn(name = "trip_booking_id")
 	private TripBooking tripbooking;
 
 	   
@@ -34,6 +33,9 @@ public class Customer extends AbstractUser{
 		super();
 	}
 
+	@OneToOne
+	@JoinColumn(name = "trip_book_id")
+	private TripBooking tripbooking;
 	/**
 	 * @param customerid
 	 */
