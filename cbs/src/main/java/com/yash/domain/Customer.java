@@ -16,9 +16,22 @@ import javax.persistence.Table;
 @Table(name="customer_data")
 public class Customer extends AbstractUser{
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int customerid;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "trip_booking_id")
+	private TripBooking tripbooking;
+
+	   
+	/**
+	 * default constructor
+	 */
+	public Customer() {
+		super();
+	}
 
 	@OneToOne
 	@JoinColumn(name = "trip_book_id")
