@@ -33,7 +33,7 @@ public class TripBookingServiceImpl //implements TripBookingService
 		 List<TripBooking> list = tbrepo.getAllTripsByCustomer(customer_id);
 		 return list;
 	
-	}	
+	 }	
 }
 //	@Override
 //	public TripBooking calculateBill(int customer_id) {
