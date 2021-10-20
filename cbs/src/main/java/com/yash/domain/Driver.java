@@ -41,7 +41,7 @@ public class Driver extends AbstractUser
 	private Cab cab;
 	
 	@OneToMany(cascade=CascadeType.ALL,targetEntity=TripBooking.class)
-	@JoinColumn(name = "tripBookingId")
+	//@JoinColumn(name = "tripBookingId")
 	private Set<TripBooking> tripBooking = new TreeSet<>();
 	
 	

@@ -1,6 +1,6 @@
 package com.yash.domain;
 
-import javax.persistence.Column;
+
 
 /*
  *Admin Pojo and data Abstraction from User

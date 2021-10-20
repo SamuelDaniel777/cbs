@@ -26,9 +26,13 @@ public class Cab {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int cabid;
+	
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "driverId")
-	private int cabid;
+	private Driver driver;
+	
 	
 	
 	/**
@@ -42,7 +46,7 @@ public class Cab {
 	/**
 	 * cab rate per kilometer
 	 */
-	@NotBlank(message = "perkmrate is required")
+	//@NotBlank(message = "perkmrate is required")
 	private float perkmRate;
 	
 	
@@ -66,6 +70,23 @@ public class Cab {
 		this.cabid = cabid;
 		this.carType = carType;
 		this.perkmRate = perkmRate;
+	}
+	
+	
+
+
+
+	
+
+
+
+	public Cab(int cabid2, Driver driver2, String carType2, float perkmRate2) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.cabid = cabid2;
+		this.carType = carType2;
+		this.perkmRate = perkmRate2;
+		this.driver=driver2;
 	}
 
 

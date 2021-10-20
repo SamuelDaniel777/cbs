@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.yash.domain.AbstractUser;
 import com.yash.domain.Admin;
 import com.yash.exception.InvalidData;
 import com.yash.serviceimpl.AdminServiceImpl;
