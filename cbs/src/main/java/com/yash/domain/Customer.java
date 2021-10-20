@@ -18,9 +18,7 @@ public class Customer extends AbstractUser{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
-	@OneToOne
-	@JoinColumn(name = "tripbooking_id")
-	TripBooking tripBooking;
+	boolean customerStatus;
 	/**
 	 * @return the id
 	 */
@@ -35,28 +33,13 @@ public class Customer extends AbstractUser{
 		this.id = id;
 	}
 
-	/**
-	 * @return the tripBooking
-	 */
-	public TripBooking getTripBooking() {
-		return tripBooking;
-	}
-
-	/**
-	 * @param tripBooking the tripBooking to set
-	 */
-	public void setTripBooking(TripBooking tripBooking) {
-		this.tripBooking = tripBooking;
-	}
-
+	
+	
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", tripBooking=" + tripBooking + ", name=" + name + ", password=" + password
-				+ ", address=" + address + ", mobileNumber=" + mobileNumber + ", email=" + email + ", getId()="
-				+ getId() + ", getTripBooking()=" + getTripBooking() + ", getName()=" + getName() + ", getPassword()="
-				+ getPassword() + ", getAddress()=" + getAddress() + ", getMobileNumber()=" + getMobileNumber()
-				+ ", getEmail()=" + getEmail() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "Customer [id=" + id + ", name=" + name + ", password=" + password + ", address=" + address
+				+ ", mobileNumber=" + mobileNumber + ", email=" + email + "]";
 	}
 
+	
 }

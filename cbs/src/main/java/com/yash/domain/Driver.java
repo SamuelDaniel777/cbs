@@ -40,9 +40,6 @@ public class Driver extends AbstractUser
 	@JoinColumn(name = "cabid")
 	private Cab cab;
 	
-	@OneToMany(mappedBy = "driver")
-	private List<TripBooking>tripBookings;
-	
 	/*
 	 * Driver Rating
 	 */
@@ -92,20 +89,6 @@ public class Driver extends AbstractUser
 	}
 	
 	/**
-	 * @return the tripBookings
-	 */
-	public List<TripBooking> getTripBookings() {
-		return tripBookings;
-	}
-
-	/**
-	 * @param tripBookings the tripBookings to set
-	 */
-	public void setTripBookings(List<TripBooking> tripBookings) {
-		this.tripBookings = tripBookings;
-	}
-
-	/**
 	 * @return the rating
 	 */
 	public float getRating() {
@@ -128,9 +111,10 @@ public class Driver extends AbstractUser
 	//ToString Method
 	@Override
 	public String toString() {
-		return "Driver [driverId=" + driverId + ", licenceNo=" + licenceNo + ", cab=" + cab + ", tripBookings="
-				+ tripBookings + ", rating=" + rating + ", name=" + name + ", password=" + password + ", address="
-				+ address + ", mobileNumber=" + mobileNumber + ", email=" + email + "]";
+		return "Driver [driverId=" + driverId + ", licenceNo=" + licenceNo + ", cab=" + cab + ", rating=" + rating
+				+ ", name=" + name + ", password=" + password + ", address=" + address + ", mobileNumber="
+				+ mobileNumber + ", email=" + email + "]";
 	}
+
 
 }

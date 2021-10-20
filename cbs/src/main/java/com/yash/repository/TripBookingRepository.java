@@ -2,24 +2,30 @@
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.yash.domain.Customer;
+import com.yash.domain.TripBooking;
+
 /*
 * TripBookingRepository inheriting the methods from JpaRepository
 * JpaRepository methods: save(), findById(), findAll(), count(), delete(), deleteById()...
 *
-* @author usha
+* @author Samuel
 * */
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import com.yash.domain.TripBooking;
+
 
 @Repository
-public interface TripBookingRepository extends JpaRepository<TripBooking, Integer> {
+public interface TripBookingRepository extends JpaRepository<TripBooking, Integer>{
 	
-	/*
-	 * this method is used for fetching records of trips on the basis of customer id
-	 */
-	
-	public List<TripBooking> getAllTripsByCustomer(int customer_id);
-	
+	@Query("select tb from TripBooking tb where customer=:c")
+	List<TripBooking> getTripsByCustomerId(@Param("c")Customer customer);
+
+	@Query("from TripBooking")
+	List<TripBooking> getAllTripBookingData();
+
  }

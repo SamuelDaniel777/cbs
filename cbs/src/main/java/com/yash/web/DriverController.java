@@ -26,12 +26,10 @@ public class DriverController {
 			session.setAttribute("driverSession", fromDriver);
 			return fromDriver;
 		} else {
-			return null;
+			return new Driver();
 		}
 		
 	}
-	
-	
 	
 	@PostMapping("/insertDriver")
 	public String insertDriver(Driver driver)

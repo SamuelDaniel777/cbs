@@ -2,78 +2,87 @@ package com.yash.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.yash.domain.Customer;
+import com.yash.domain.Driver;
 import com.yash.domain.TripBooking;
-import com.yash.repository.TripBookingRepository;
 import com.yash.serviceimpl.TripBookingServiceImpl;
 
 /**
- * controller for project class mapping the URL from here 
- * @author usha.more
+ * controller for project class mapping the URL from here
+ * 
+ * @author daniel
  *
  */
-@RestController
-//@RequestMapping("/tripBooking")
-@CrossOrigin   
-//(origins = "http://localhost:8081/cbs/")
-public class TripBookingController 
-{
-	@Autowired
-	 TripBookingServiceImpl tripbookingimpl;
-	@Autowired
- TripBookingRepository tripbookingRepository;
-	
-	
-	@PostMapping("/save")//http://localhost:8081/cbs/save
-	public String createTrip(@RequestBody TripBooking tripBooking)
-	{
 
-	tripbookingRepository.save(tripBooking );
-	return "Trip  inserted";
+@RestController
+@RequestMapping("/tripbooking")
+public class TripBookingController {
+
+	@Autowired
+	TripBookingServiceImpl tripbookingimpl;
+
+	Logger logger = LoggerFactory.getLogger(TripBookingController.class);
+
+	@PostMapping("/registerbycustomer")
+	public TripBooking getTripBooking(TripBooking tb, HttpSession session) {
+		Customer customer = (Customer) session.getAttribute("customerSession");
+		logger.trace("customer data recieved" + customer + tb);
+		TripBooking tripBooking = tripbookingimpl.registerOrUpdateCustomerBooking(tb, customer);
+		logger.trace("done" + tripBooking);
+		return tripBooking;
+
+	}
+
+	@PostMapping("/updatetripbooking")
+	public TripBooking updateTripBooking(TripBooking tb) {
+		logger.trace("data recieved" + tb);
+		Customer customer = null;
+		TripBooking tripBooking = tripbookingimpl.registerOrUpdateCustomerBooking(tb, customer);
+		return tripBooking;
+
+	}
+
+	@PostMapping("/deletetrip")
+	public Boolean deleteTripBooking(TripBooking tb) {
+		logger.trace("data recieved" + tb);
+		Boolean b = tripbookingimpl.deleteTripById(tb);
+		return b;
+
+	}
+
+	@PostMapping("/viewtrips")
+	public List<TripBooking> viewTripBookings(HttpSession session) {
+		Customer customer = (Customer) session.getAttribute("customerSession");
+		logger.trace("got customer id" + customer.getId());
+		List<TripBooking> list = tripbookingimpl.viewAllTripsById(customer);
+		return list;
+		
+	}
+
+	@PostMapping("/viewalltrips")
+	public List<TripBooking> getAllTripBookings() {
+		List<TripBooking> tList=tripbookingimpl.getAllTrips();
+		return tList;
+		
 	}
 	
-	@GetMapping("/list")//http://localhost:8081/cbs/list
-	public List<TripBooking > getAllTrip()
-	{
-	return (List<TripBooking >) tripbookingRepository.findAll() ;
-	}
-   
-//	@GetMapping("/custlist")//http://localhost:8081/cbs/list
-//	public List<TripBooking > getAllTripbycustomer()
-//	{
-//	return (List<TripBooking >) tripbookingRepository.findAll() ;
-//	}
-	
-	@GetMapping()//http://localhost:8081/cbs/
-	public  List<TripBooking > findTripByCustomer(@PathVariable int customerid)
-	{
-	    List<TripBooking> tblist = tripbookingimpl.getAllTripsByCustomer(customerid);
-	      return tblist;
+	@PostMapping("/confirmdriver")
+	public Boolean driverConfirm(TripBooking tb,HttpSession session) {
+		Driver sDriver= (Driver)session.getAttribute("driverSession");
+		logger.trace("driver data recieved"+sDriver);
+		Boolean b=tripbookingimpl.setDriverDetails(tb,sDriver);
+		logger.trace("status value"+b);
+		return b;
 	}
 	
-	@DeleteMapping("/{id}")
-	public String deletetripbyid(@PathVariable("id") int id ) 
-	{
-		try {
-		tripbookingRepository.deleteById(id) ;
-		return "delete id";	
-	 }
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	 }
+	
 	
 }

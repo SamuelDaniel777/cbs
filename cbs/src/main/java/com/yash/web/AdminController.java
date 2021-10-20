@@ -32,6 +32,7 @@ public class AdminController {
 		logger.trace("recevied the valid or null data"+fromAdminServ);
 		if (fromAdminServ!=null) {
 			session.setAttribute("AdminSession", fromAdminServ);
+			
 			return fromAdminServ;
 		} else {
 			return new Admin();

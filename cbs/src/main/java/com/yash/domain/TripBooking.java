@@ -1,14 +1,14 @@
 
 package com.yash.domain;
 
+import java.sql.Date;
 /*
 * POJO TripBooking class
 * containing instance variables, constructors
 * getters setters and toString() method
 *
-* @author usha.more
+* author:- @Daniel
 */
-import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "trip_booking")
@@ -41,82 +42,52 @@ public class TripBooking {
 	 * booking
 	 */
 	@ManyToOne
+	@JoinColumn(name = "driver_id")
 	private Driver driver;
 	/*
 	 * fromLocation stores the value of location from where customer has booked the
 	 * cab
 	 */
-	@NotBlank(message = "From location can't be blank")
-	@Column(name = "fromLocation", nullable = false)
+
+	@Column(name = "fromLocation")
 	private String fromLocation;
 	/*
 	 * toLocation stores the value of location till where customer has booked the
 	 * cab
 	 */
-	@NotBlank(message = "To location can't be blank")
-	@Column(name = "toLocation", nullable = false)
+
+	@Column(name = "toLocation")
 	private String toLocation;
 	/*
 	 * fromDateTime stores the value of date and time on which the customer has
 	 * booked the cab
 	 */
-	@NotBlank(message = "From Date time can't be blank")
-	// @JsonFormat(pattern="yyyy-mm-dd")
-	@Column(name = "fromDateTime", nullable = false)
-	private LocalDateTime fromDateTime;
+	@JsonFormat(pattern = "yyyy-mm-dd")
+	@Column(name = "fromDateTime")
+	private Date fromDateTime;
 	/*
 	 * toDateTime stores the value of date and time on which the customer has left
 	 * the cab
 	 */
-	@NotBlank(message = "To Date time can't be blank")
-	// @JsonFormat(pattern="yyyy-mm-dd")
-	@Column(name = "toDateTime", nullable = false)
-	private LocalDateTime toDateTime;
+	@JsonFormat(pattern = "yyyy-mm-dd")
+	@Column(name = "toDateTime")
+	private Date toDateTime;
+
 	/* status stores the value of status of the trip */
-	@Column(name = "status", nullable = false)
+	@Column(name = "status")
 	private boolean status;
+
 	/* distance stores the value of total distance covered by the cab in kms */
-	@NotBlank(message = "Distance can't be blank")
-	@Column(name = "distanceInKm", nullable = false)
+	@Column(name = "distanceInKm")
 	private float distanceInKm;
+
 	/* bill stores the value of total amount paid by the customer for a trip */
-	@Column(name = "bill", nullable = false)
+	@Column(name = "bill")
 	private float bill;
 
 	/* default constructor */
 	public TripBooking() {
 	} /* parametrized constructor for initializing values to instance variables */
-
-	/**
-	 * @param tripBookingId
-	 * @param customer
-	 * @param driver
-	 * @param fromLocation
-	 * @param toLocation
-	 * @param fromDateTime
-	 * @param toDateTime
-	 * @param status
-	 * @param distanceInKm
-	 * @param bill
-	 */
-	public TripBooking(int tripBookingId, Customer customer, Driver driver,
-			@NotBlank(message = "From location can't be blank") String fromLocation,
-			@NotBlank(message = "To location can't be blank") String toLocation,
-			@NotBlank(message = "From Date time can't be blank") LocalDateTime fromDateTime,
-			@NotBlank(message = "To Date time can't be blank") LocalDateTime toDateTime, boolean status,
-			@NotBlank(message = "Distance can't be blank") float distanceInKm, float bill) {
-		super();
-		this.tripBookingId = tripBookingId;
-		this.customer = customer;
-		this.driver = driver;
-		this.fromLocation = fromLocation;
-		this.toLocation = toLocation;
-		this.fromDateTime = fromDateTime;
-		this.toDateTime = toDateTime;
-		this.status = status;
-		this.distanceInKm = distanceInKm;
-		this.bill = bill;
-	}
 
 	/**
 	 * @return the tripBookingId
@@ -191,28 +162,28 @@ public class TripBooking {
 	/**
 	 * @return the fromDateTime
 	 */
-	public LocalDateTime getFromDateTime() {
+	public Date getFromDateTime() {
 		return fromDateTime;
 	}
 
 	/**
 	 * @param fromDateTime the fromDateTime to set
 	 */
-	public void setFromDateTime(LocalDateTime fromDateTime) {
+	public void setFromDateTime(Date fromDateTime) {
 		this.fromDateTime = fromDateTime;
 	}
 
 	/**
 	 * @return the toDateTime
 	 */
-	public LocalDateTime getToDateTime() {
+	public Date getToDateTime() {
 		return toDateTime;
 	}
 
 	/**
 	 * @param toDateTime the toDateTime to set
 	 */
-	public void setToDateTime(LocalDateTime toDateTime) {
+	public void setToDateTime(Date toDateTime) {
 		this.toDateTime = toDateTime;
 	}
 
@@ -266,4 +237,6 @@ public class TripBooking {
 				+ ", toDateTime=" + toDateTime + ", status=" + status + ", distanceInKm=" + distanceInKm + ", bill="
 				+ bill + "]";
 	}
+	
+	
 }
