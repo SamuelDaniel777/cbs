@@ -1,9 +1,12 @@
 package com.yash.domain;
 
+/*
+ * Customer Pojo 
+ * author akshay.patil
+ * 
+ * 
+ */
 import javax.persistence.CascadeType;
-
-//Customer Pojo 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +25,10 @@ public class Customer extends AbstractUser{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int customerid;
 
+	public Customer()
+	{
+		super();
+	}
 	/**
 	 * @param customerid
 	 */

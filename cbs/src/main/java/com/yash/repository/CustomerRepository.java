@@ -1,14 +1,25 @@
 package com.yash.repository;
 
-import java.util.List;
+/*
+ * customer Repository
+ * author akshay.patil  
+ * 
+ */
+import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 
 import com.yash.domain.Customer;
 
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer,Integer> 
+public interface CustomerRepository extends JpaRepository<Customer,Integer> 
 {
-	List<Customer> findById(int id);
+	Optional<Customer> findById(int id);
+
+	public Customer findCustomerByName(String name);
+
+	public Customer findByemail(String email);
+
 }

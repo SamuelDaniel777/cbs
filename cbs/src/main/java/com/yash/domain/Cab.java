@@ -24,12 +24,14 @@ public class Cab {
 	 * id of cabid
 	 */
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "driverId")
 	private int cabid;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "driverId")
+	private Driver driver;
 	
 	/**
 	 * carType for cab
@@ -128,12 +130,6 @@ public class Cab {
 	public String toString() {
 		return "Cab [cabid=" + cabid + ", carType=" + carType + ", perkmRate=" + perkmRate + "]";
 	}
-	
-	
-	
-	
-	
-	
 	
 
 }
