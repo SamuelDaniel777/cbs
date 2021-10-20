@@ -79,6 +79,8 @@ public class CabController {
 		}
 
 	}
+	
+	
 
 	@GetMapping("/typescabcount/{carType}")//http://localhost:8080/cbs/typescabcount/{carType}
 	public int getAllCabSize(@PathVariable("carType") String carType )
