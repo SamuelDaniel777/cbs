@@ -1,9 +1,5 @@
 package com.yash.domain;
 
-import javax.persistence.CascadeType;
-
-//Customer Pojo 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,37 +8,55 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+//Customer Pojo 
+
 @Entity
-@Table(name="customer_data")
+@Table(name = "customer_data")
 public class Customer extends AbstractUser{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int customerid;
-
-	@OneToOne
-	@JoinColumn(name = "trip_book_id")
-	private TripBooking tripbooking;
-	/**
-	 * @param customerid
-	 */
-	public Customer(int customerid) {
-		super();
-		this.customerid = customerid;
-	}
-
-	/**
-	 * @return the customerid
-	 */
-	public int getCustomerid() {
-		return customerid;
-	}
-
-	/**
-	 * @param customerid the customerid to set
-	 */
-	public void setCustomerid(int customerid) {
-		this.customerid = customerid;
-	}
+	int id;
 	
+	@OneToOne
+	@JoinColumn(name = "tripbooking_id")
+	TripBooking tripBooking;
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the tripBooking
+	 */
+	public TripBooking getTripBooking() {
+		return tripBooking;
+	}
+
+	/**
+	 * @param tripBooking the tripBooking to set
+	 */
+	public void setTripBooking(TripBooking tripBooking) {
+		this.tripBooking = tripBooking;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", tripBooking=" + tripBooking + ", name=" + name + ", password=" + password
+				+ ", address=" + address + ", mobileNumber=" + mobileNumber + ", email=" + email + ", getId()="
+				+ getId() + ", getTripBooking()=" + getTripBooking() + ", getName()=" + getName() + ", getPassword()="
+				+ getPassword() + ", getAddress()=" + getAddress() + ", getMobileNumber()=" + getMobileNumber()
+				+ ", getEmail()=" + getEmail() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+
 }

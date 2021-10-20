@@ -34,7 +34,7 @@ public class TripBooking {
 	 * booking-
 	 */
 	@OneToOne
-	@JoinColumn(name = "customerid")
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	/*
 	 * driver stores the value of driver entity - many to one mapped with trip

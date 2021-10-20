@@ -19,6 +19,7 @@ public interface TripBookingRepository extends JpaRepository<TripBooking, Intege
 	/*
 	 * this method is used for fetching records of trips on the basis of customer id
 	 */
+	
 	public List<TripBooking> getAllTripsByCustomer(int customer_id);
-
+	
  }

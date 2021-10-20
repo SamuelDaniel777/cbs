@@ -1,11 +1,11 @@
 package com.yash.serviceimpl;
 
-import org.jvnet.hk2.annotations.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Service;
 
 import com.yash.domain.Driver;
+import com.yash.exception.InvalidData;
 import com.yash.repository.DriverRepository;
 
 @Service
@@ -13,6 +13,20 @@ public class DriverServiceImpl {
 	
 	@Autowired
 	DriverRepository driverRepository;
+	
+	
+	public Driver requestLogin(String email, String password) throws InvalidData {
+
+		try {
+			Driver driver= driverRepository.getByNameAndPassowrd(email, password);
+			return driver;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 	
 	//Create
 	public boolean registerDriver(Driver driver)

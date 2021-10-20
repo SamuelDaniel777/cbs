@@ -24,7 +24,7 @@ public interface TripBookingService {
 	/*
 	 * this method is used for calculating bill of trip on the basis of customer id
 	 */
-
+	
 	public TripBooking calculateBill(int customer_id);
-
+	
    }
