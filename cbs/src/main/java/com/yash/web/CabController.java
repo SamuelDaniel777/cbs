@@ -43,6 +43,7 @@ public class CabController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
+	
 
 	@DeleteMapping("/delete/{id}")//http://localhost:8080/cbs/delete/{id}
 	public ResponseEntity<HttpStatus> deletecab(@PathVariable("id") int id)

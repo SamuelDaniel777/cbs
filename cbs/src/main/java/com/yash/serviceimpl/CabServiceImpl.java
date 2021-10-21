@@ -9,18 +9,24 @@ import org.springframework.stereotype.Service;
 import com.yash.domain.Cab;
 import com.yash.exception.CabIdException;
 import com.yash.repository.CabRepository;
-
-
+/**
+ * class cabserviceimpl
+ */
 @Service
 public class CabServiceImpl
 {
 
 	Logger logger= Logger.getAnonymousLogger();
+	
 
 	@Autowired
 	CabRepository cabrepository;
 	
-
+	/**
+	 * insert data for cab
+	 * @param cab
+	 * @return
+	 */
 	public Cab insertcab(Cab cab)
 	{
 		try {
@@ -33,6 +39,11 @@ public class CabServiceImpl
 	}
 	
 
+	/**
+	 * this delete 
+	 * @param id
+	 * @return
+	 */
 	public Cab deleteCabdetail(int id)
 	{
 		try {
@@ -46,7 +57,11 @@ public class CabServiceImpl
 	}
 	
 
-	
+	/**
+	 * types of cartype
+	 * @param carType
+	 * @return
+	 */
 	public Set<Cab> viewcabsOfTypes(String carType) {
 		try {
 			Set<Cab> cablistCabs= cabrepository.viewcabsOfTypes(carType);
@@ -58,6 +73,11 @@ public class CabServiceImpl
 		return null;
 	}
 	
+	/**
+	 * Types of cartype Size
+	 * @param carType
+	 * @return
+	 */
 	public int countCabsOfType(String carType)
 	{
 		return cabrepository.viewcabsOfTypes(carType).size();
