@@ -40,6 +40,7 @@ public class Driver extends AbstractUser
 	@JoinColumn(name = "cabid")
 	private Cab cab;
 	
+	
 	/*
 	 * Driver Rating
 	 */
