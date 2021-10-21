@@ -23,7 +23,7 @@ import com.yash.exception.CustomerIdNotFoundException;
 import com.yash.exception.InvalidNameException;
 import com.yash.exception.RecordNotFoundException;
 import com.yash.repository.CustomerRepository;
-import com.yash.service.CustomerService;
+
 import com.yash.serviceimpl.CustomerServiceImpl;
 
 @RestController
@@ -32,7 +32,7 @@ public class CustomerController
 	@Autowired
 	CustomerServiceImpl customerServiceImpl;
 
-	
+
 	@Autowired
 	CustomerRepository customerRepository;
 
@@ -90,7 +90,7 @@ public class CustomerController
 		Customer entity = customerServiceImpl.getCustomerByName(CustName);
 		return new ResponseEntity<Customer>(entity, new HttpHeaders(), HttpStatus.OK);
 	}
-	
+
 	/*
 	 * get customer by email
 	 */
@@ -101,5 +101,8 @@ public class CustomerController
 		return new ResponseEntity<Customer>(entity, new HttpHeaders(), HttpStatus.OK);
 	}
 
+	
+	
+	
 
 }

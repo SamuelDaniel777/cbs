@@ -7,6 +7,7 @@ package com.yash.exception;
  *
  */
 
+
 public class InvalidNameException extends Exception
 {
 
