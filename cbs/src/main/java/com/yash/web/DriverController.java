@@ -1,10 +1,18 @@
 package com.yash.web;
 
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +21,7 @@ import com.yash.exception.InvalidData;
 import com.yash.serviceimpl.DriverServiceImpl;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/driver")
 public class DriverController {
 
@@ -20,7 +29,7 @@ public class DriverController {
 	DriverServiceImpl driverServiceImpl;
 	
 	@PostMapping("/login")
-	public Driver adminLogin(Driver driver,HttpSession session) throws InvalidData {
+	public Driver driverLogin(Driver driver,HttpSession session) throws InvalidData {
 		Driver fromDriver = driverServiceImpl.requestLogin(driver.getEmail(),driver.getPassword());
 		if (fromDriver!=null) {
 			session.setAttribute("driverSession", fromDriver);
@@ -31,20 +40,41 @@ public class DriverController {
 		
 	}
 	
+	
+	@GetMapping("/listDriver")
+	public List<Driver> getAllDriver()
+	{
+		return driverServiceImpl.listDriver();
+	}
+
+
 	@PostMapping("/insertDriver")
 	public String insertDriver(Driver driver)
 	{
-		driverServiceImpl.registerDriver(driver);
+		driverServiceImpl.registerAndUpdateDriver(driver);
 		return "Your record is saved successfully";
 	}
-	
-	
-	
-	
-//	@GetMapping("/viewDriver/{driverId}")
-//	public Optional<Driver> viewDriver(@PathVariable("driverId") int id)
-//	{
-//		return driverRepository.findById(id);
-//	}
-	
+
+	@DeleteMapping("/delete/{id}")//http://localhost:8080/cbs/delete/{id}
+	public ResponseEntity<HttpStatus> deleteDriverdetail(@PathVariable("id") int id)
+	{
+		driverServiceImpl.deleteDriver(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT) ;
+	}
+
+	@PutMapping("/updateDriver")
+	public String updateDriver(Driver driver)
+	{
+		driverServiceImpl.registerAndUpdateDriver(driver);
+		return "Your record is saved successfully";
+	}
+
+
+
+	@GetMapping("/viewDriver/{driverId}")
+	public Driver viewDriver(@PathVariable("driverId") int id)
+	{
+		return driverServiceImpl.getDriverById(id);
+	}
+
 }

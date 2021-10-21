@@ -61,7 +61,7 @@ public class TripBookingController {
 	@PostMapping("/viewtrips")
 	public List<TripBooking> viewTripBookings(HttpSession session) {
 		Customer customer = (Customer) session.getAttribute("customerSession");
-		logger.trace("got customer id" + customer.getId());
+		logger.trace("got customer id" + customer.getCustomerid());
 		List<TripBooking> list = tripbookingimpl.viewAllTripsById(customer);
 		return list;
 		

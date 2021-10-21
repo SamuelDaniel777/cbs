@@ -24,7 +24,4 @@ public interface CabRepository extends JpaRepository<Cab, Integer> {
 	@Query(value = "select c from Cab c where c.carType=:ct")
 	public Set<Cab> countCabsOfType(@Param("ct") String carType);
 	
-	
-	
-
 }

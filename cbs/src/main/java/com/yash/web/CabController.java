@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yash.domain.Cab;
 import com.yash.repository.CabRepository;
 import com.yash.serviceimpl.CabServiceImpl;
 
-@CrossOrigin()
+@CrossOrigin
 @RestController
+@RequestMapping("/cab")
 public class CabController {
 
 	Logger logger=Logger.getAnonymousLogger();

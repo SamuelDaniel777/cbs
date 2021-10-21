@@ -1,45 +1,51 @@
 package com.yash.domain;
 
+/*
+ * Customer Pojo 
+ * author akshay.patil
+ * 
+ * 
+ */
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-//Customer Pojo 
-
 @Entity
-@Table(name = "customer_data")
+@Table(name="customer_data")
 public class Customer extends AbstractUser{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
-	
-	boolean customerStatus;
+	int customerid;
+
+	public Customer()
+	{
+		super();
+	}
 	/**
-	 * @return the id
+	 * @param customerid
 	 */
-	public int getId() {
-		return id;
+	public Customer(int customerid) {
+		super();
+		this.customerid = customerid;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @return the customerid
 	 */
-	public void setId(int id) {
-		this.id = id;
+	public int getCustomerid() {
+		return customerid;
 	}
 
-	
-	
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", password=" + password + ", address=" + address
-				+ ", mobileNumber=" + mobileNumber + ", email=" + email + "]";
+	/**
+	 * @param customerid the customerid to set
+	 */
+	public void setCustomerid(int customerid) {
+		this.customerid = customerid;
 	}
-
 	
 }

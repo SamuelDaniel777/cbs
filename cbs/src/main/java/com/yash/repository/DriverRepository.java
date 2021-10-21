@@ -9,6 +9,8 @@ import com.yash.domain.Driver;
 
 @Repository
 public interface DriverRepository extends JpaRepository<Driver, Integer> {
+
 	@Query("from Driver where email=:em and password=:pd")
 	Driver getByNameAndPassowrd(@Param("em")String email,@Param("pd") String password);
+	
 }

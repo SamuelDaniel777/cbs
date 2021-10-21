@@ -17,8 +17,6 @@ import com.yash.domain.TripBooking;
 * @author Samuel
 * */
 
-
-
 @Repository
 public interface TripBookingRepository extends JpaRepository<TripBooking, Integer>{
 	
