@@ -21,13 +21,13 @@ import com.yash.exception.InvalidData;
 import com.yash.serviceimpl.DriverServiceImpl;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/driver")
+@CrossOrigin(origins = "http://localhost:3000")
 public class DriverController {
 
 	@Autowired
 	DriverServiceImpl driverServiceImpl;
-	
+
 	@PostMapping("/login")
 	public Driver driverLogin(Driver driver,HttpSession session) throws InvalidData {
 		Driver fromDriver = driverServiceImpl.requestLogin(driver.getEmail(),driver.getPassword());

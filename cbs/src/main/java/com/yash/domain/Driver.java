@@ -1,17 +1,13 @@
 package com.yash.domain;
 
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -25,6 +21,7 @@ public class Driver extends AbstractUser
 	/*
 	 * Driver Id 
 	 */
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int driverId;
@@ -40,7 +37,23 @@ public class Driver extends AbstractUser
 	@JoinColumn(name = "cabid")
 	private Cab cab;
 	
-	
+	@Column(name = "driver_role")
+	private String role;
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	/*
 	 * Driver Rating
 	 */

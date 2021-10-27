@@ -6,22 +6,41 @@ package com.yash.domain;
  * 
  * 
  */
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Entity
 @Table(name="customer_data")
+@CrossOrigin
 public class Customer extends AbstractUser{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int customerid;
-
+	
+	@Column(name = "customer_role")
+	private String role;
+	
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+	 
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 	public Customer()
 	{
 		super();
@@ -42,10 +61,15 @@ public class Customer extends AbstractUser{
 	}
 
 	/**
-	 * @param customerid the customerid to set
+	 * @param customerid
+	 * @param role
 	 */
-	public void setCustomerid(int customerid) {
+	public Customer(int customerid, String role) {
+		super();
 		this.customerid = customerid;
+		this.role = role;
 	}
+	
+	
 	
 }

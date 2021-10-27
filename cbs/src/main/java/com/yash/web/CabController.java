@@ -20,7 +20,7 @@ import com.yash.domain.Cab;
 import com.yash.repository.CabRepository;
 import com.yash.serviceimpl.CabServiceImpl;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/cab")
 public class CabController {

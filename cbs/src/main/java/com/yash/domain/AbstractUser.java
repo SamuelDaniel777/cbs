@@ -7,28 +7,34 @@ Abstract User Class For Common Fields
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
 
 @MappedSuperclass
 public abstract class AbstractUser {
 	
 	//Field user name(Mandatory Field)
+	@NotBlank(message = "field is required name cannot be empty")
 	@Column(nullable = false)
-	protected String name;
+	protected String name; 
 	
 	//Field User Passowrd(Mandatory Field)
+	@NotBlank(message = "field is required password cannot be empty")
 	@Column(nullable = false)
 	protected String password;
 	
 	//Field User Address(Mandatory Field)
+	@NotBlank(message = "field is required address cannot be empty")
 	@Column(nullable = false)
 	protected String address;
 	
 	//Field User MobileNumber(Mandatory Field, Unique Field)
 	@Column(nullable = false, unique = true)
+	@NotBlank(message = "field is required mobilenumber cannot be empty")
 	protected String mobileNumber;
 	
 	//Field User email(Mandatory Field, Unique Field)
 	@Column(nullable = false, unique = true)
+	@NotBlank(message = "field is required email cannot be empty")
 	protected String email;
 
 	/**

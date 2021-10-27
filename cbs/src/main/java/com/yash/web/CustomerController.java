@@ -1,13 +1,17 @@
 package com.yash.web;
 
+import java.util.HashMap;
+
 /*
  * customer controller
  * author akshay.patil
  */
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yash.domain.Admin;
 import com.yash.domain.Customer;
 import com.yash.exception.CustomerIdNotFoundException;
 import com.yash.exception.InvalidData;
@@ -35,8 +41,10 @@ import com.yash.serviceimpl.CustomerServiceImpl;
 
 @RestController
 @RequestMapping("/customer")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CustomerController 
 {
+	
 	@Autowired
 	CustomerServiceImpl customerServiceImpl;
 	
@@ -58,20 +66,31 @@ public class CustomerController
 	/*
 	 * insert customer
 	 */
-	@PostMapping("/save")//http://localhost:8080/cbs/save
-	public String createcustomer(@RequestBody Customer customer)
+	
+	@PostMapping("/register")//http://localhost:8080/cbs/register
+	public ResponseEntity<?> createcustomer(@Valid Customer customer,BindingResult result)
 	{
-		customerServiceImpl.insertCustomer(customer);
-		return "customer inserted";
+		Map<String, String> errorMap=new HashMap<>();
+		
+		for (FieldError fieldError : result.getFieldErrors()) {
+			errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
+		}
+		
+		if (result.hasErrors()) {
+			return new ResponseEntity <Map<String,String>>(errorMap,HttpStatus.BAD_REQUEST);
+		}
+		Customer cus= customerServiceImpl.insertCustomer(customer);
+		return new ResponseEntity<Customer>(cus,HttpStatus.CREATED);
 	}
+	
 	/*
 	 * update customer by id
 	 */
 	@PutMapping("/update")//http://localhost:8080/cbs/update
-	public String updatecustomer(@RequestBody Customer customer)
+	public Customer updatecustomer(Customer customer)
 	{
-		customerServiceImpl.insertCustomer(customer);
-		return "customer data update";
+		Customer cus= customerServiceImpl.insertCustomer(customer);
+		return cus;
 	}
 	/*
 	 * list of all customer
@@ -120,4 +139,5 @@ public class CustomerController
 		return new ResponseEntity<Customer>(entity, new HttpHeaders(), HttpStatus.OK);
 	}
 
+	
 }

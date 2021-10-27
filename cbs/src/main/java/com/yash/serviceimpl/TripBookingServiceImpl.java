@@ -30,6 +30,7 @@ public class TripBookingServiceImpl {
 			TripBooking tripbook = tbrepo.getById(tb.getTripBookingId());
 			return tripbook;
 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -71,6 +72,7 @@ public class TripBookingServiceImpl {
 		try {
 			TripBooking tBooking= tbrepo.getById(tb.getTripBookingId());
 			tBooking.setDriver(sDriver);
+			tBooking.setStatus(true);
 			tbrepo.save(tBooking);
 			return true;
 		} catch (Exception e) {

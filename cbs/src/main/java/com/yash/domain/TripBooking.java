@@ -1,7 +1,8 @@
 
 package com.yash.domain;
 
-import java.sql.Date;
+import java.util.Date;
+
 /*
 * POJO TripBooking class
 * containing instance variables, constructors
@@ -18,13 +19,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "trip_booking")
 public class TripBooking {
-
+	
 	/* id stores the value of trip booking id */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +36,7 @@ public class TripBooking {
 	 * booking-
 	 */
 	@OneToOne
-	@JoinColumn(name = "customer_id")
+	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
 	/*
 	 * driver stores the value of driver entity - many to one mapped with trip
@@ -50,6 +51,7 @@ public class TripBooking {
 	 */
 
 	@Column(name = "fromLocation")
+	@NotBlank(message = "field is required from location cannot be empty")
 	private String fromLocation;
 	/*
 	 * toLocation stores the value of location till where customer has booked the
@@ -57,6 +59,7 @@ public class TripBooking {
 	 */
 
 	@Column(name = "toLocation")
+	@NotBlank(message = "field to Location cannot be empty")
 	private String toLocation;
 	/*
 	 * fromDateTime stores the value of date and time on which the customer has
@@ -237,6 +240,6 @@ public class TripBooking {
 				+ ", toDateTime=" + toDateTime + ", status=" + status + ", distanceInKm=" + distanceInKm + ", bill="
 				+ bill + "]";
 	}
-	
+
 	
 }

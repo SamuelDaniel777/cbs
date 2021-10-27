@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +22,9 @@ public class Admin extends AbstractUser{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int adminid;
+	
+	@Column(name = "admin_role")
+	private String role;
 
 	/**
 	 * @return the adminid
@@ -28,13 +32,32 @@ public class Admin extends AbstractUser{
 	public int getAdminid() {
 		return adminid;
 	}
-	
+
 	/**
 	 * @param adminid the adminid to set
 	 */
 	public void setAdminid(int adminid) {
 		this.adminid = adminid;
 	}
+
+
+
+
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 
 	@Override
 	public String toString() {

@@ -25,5 +25,7 @@ public interface TripBookingRepository extends JpaRepository<TripBooking, Intege
 
 	@Query("from TripBooking")
 	List<TripBooking> getAllTripBookingData();
+	
+	
 
  }
